@@ -29,7 +29,15 @@ Input: nums1 = [2], nums2 = []
 Output: 2.00000
 """
 
-from statistics import median
+def median_list(nums):
+  length = len(nums)
+  if length % 2 == 0:
+    midpoint_upper = nums[length//2]
+    midpoint_lower = nums[length//2 - 1]
+    median = (midpoint_lower + midpoint_upper)/2
+  else:
+    median = nums[length//2]
+  return median
 
 def quicksort_subroutine(nums1):
   piv_points = []
@@ -41,7 +49,7 @@ def quicksort_subroutine(nums1):
     piv_points.append(nums1[0])
     piv_points.append(nums1[len(nums1)//2])
     piv_points.append(nums1[len(nums1)-1])
-    pivot = median(piv_points)
+    pivot = median_list(piv_points)
     for nums1 in nums1:
       if nums1 < pivot:
         left.append(nums1)
@@ -55,10 +63,12 @@ def quicksort_subroutine(nums1):
 
 def merge_and_sort(nums1, nums2):
   nums1 += nums2
-  nums1 = quicksort_subroutine(nums1)
-  print(nums1)
-  medianvalue = median(nums1)
-  return medianvalue
+  nums = quicksort_subroutine(nums1)
+  return nums
+
+nums = merge_and_sort([1,2],[3,4])
+
+print(median_list(nums))
 
 """
 SUCCESS
